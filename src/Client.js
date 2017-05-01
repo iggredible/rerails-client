@@ -1,6 +1,6 @@
 function search(cb) {
   console.log('running search');
-  return fetch(`api/todos/1`,  {
+  return fetch(`api/todos`,  {
       headers : {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
@@ -11,7 +11,7 @@ function search(cb) {
 
 function parseJSON(response){
   return response.json();
-}
+};
 
 const Client = { search };
 

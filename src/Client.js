@@ -1,5 +1,4 @@
-function search(cb) {
-  console.log('running search');
+function getTodos(cb) {
   return fetch(`api/todos`,  {
       headers : {
         'Content-Type': 'application/json',
@@ -7,12 +6,20 @@ function search(cb) {
       }})
     .then((response) => response.json())
     .then(cb);
-}
-
-function parseJSON(response){
-  return response.json();
 };
 
-const Client = { search };
+function postTodo(todo, cb){
+  return fetch(`api/todos`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      description: todo
+    })
+  }).then(cb);
+};
+
+const Client = { getTodos, postTodo };
 
 export default Client;

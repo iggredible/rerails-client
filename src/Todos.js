@@ -1,28 +1,35 @@
 import React from 'react';
 import Client from './Client';
+import AddTodo from './AddTodo';
 
 class Todos extends React.Component{
   constructor() {
     super();
     this.state = {
       todos: [],
-      awesome: "Awesome!"
+      todo: 'do this!'
     };
-  }
-  handleDisplay(){
-    Client.search((todos) => {
-      this.setState({
-        todos: todos
-      })
+    this.handleChange = this.handleChange.bind(this);
+    this.postTodo = this.postTodo.bind(this);
+  };
+  handleChange(e){
+    this.setState({todo: e.target.value})
+  };
+  getTodos(){
+    Client.getTodos((todos) => {
+      this.setState({todos})
     });
   };
-
-  componentWillMount(){
-    this.handleDisplay();
+  postTodo(e){
+    let todo = this.state.todo;
+    Client.postTodo(todo, (todo) => {
+      this.setState({todos: this.state.todos.concat([todo])})
+    });
   };
+  componentDidMount(){this.getTodos()};
 
   render(){
-    console.log("todoList: ", this.state.todos);
+//    this.getTodos();
     return (
       <div>
         <p>Hello from todos!</p>
@@ -31,6 +38,11 @@ class Todos extends React.Component{
             <li key={index}>{t.description}</li>
           )}
         </ul>
+
+        <AddTodo todo={this.state.todo}
+          handleChange={this.handleChange}
+          postTodo={this.postTodo}
+        />
       </div>
     )
   }

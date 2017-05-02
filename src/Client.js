@@ -17,13 +17,14 @@ function postTodo(todo, cb){
     body: JSON.stringify({
       description: todo
     })
-  }).then(cb);
+  }).then((response) => response.json())
+  .then(cb);
 };
 
-function deleteTodo(todoId){
+function deleteTodo(todoId, cb){
   return fetch(`api/todos/${todoId}`, {
     method: 'DELETE'
-  }).then(() => console.log('deleted'))
+  }).then(cb)
 }
 
 const Client = { getTodos, postTodo, deleteTodo };

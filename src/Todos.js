@@ -19,21 +19,26 @@ class Todos extends React.Component{
   getTodos(){
     Client.getTodos((todos) => {
       this.setState({todos})
-    });
+    }, () => console.log(this.state.todos));
   };
   postTodo(e){
     let todo = this.state.todo;
     Client.postTodo(todo, (todo) => {
       this.setState({todos: this.state.todos.concat([todo])})
     });
+    console.log(this.state.todos);
   };
   deleteTodo(todo){
-    Client.deleteTodo(todo);
+    Client.deleteTodo(todo, () => {
+      this.getTodos();
+    });
   };
-  componentDidMount(){this.getTodos()};
+  componentDidMount(){
+    this.getTodos();
+  };
 
   render(){
-    //this.getTodos();
+    console.log("rendered");
     return (
       <div>
         <p>Hello from todos!</p>

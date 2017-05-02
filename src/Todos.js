@@ -11,6 +11,7 @@ class Todos extends React.Component{
     };
     this.handleChange = this.handleChange.bind(this);
     this.postTodo = this.postTodo.bind(this);
+    this.deleteTodo = this.deleteTodo.bind(this);
   };
   handleChange(e){
     this.setState({todo: e.target.value})
@@ -26,16 +27,19 @@ class Todos extends React.Component{
       this.setState({todos: this.state.todos.concat([todo])})
     });
   };
+  deleteTodo(todo){
+    Client.deleteTodo(todo);
+  };
   componentDidMount(){this.getTodos()};
 
   render(){
-//    this.getTodos();
+    //this.getTodos();
     return (
       <div>
         <p>Hello from todos!</p>
         <ul>
-          {this.state.todos.map((t, index) =>
-            <li key={index}>{t.description}</li>
+          {this.state.todos.map((todo, index) =>
+            <li key={index}>{todo.description} <a href="#" onClick={() => this.deleteTodo(todo.id)}>x</a></li>
           )}
         </ul>
 
@@ -43,6 +47,8 @@ class Todos extends React.Component{
           handleChange={this.handleChange}
           postTodo={this.postTodo}
         />
+
+      <input type="button" value="Delete" onClick={this.deleteTodo} />
       </div>
     )
   }

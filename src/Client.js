@@ -20,6 +20,12 @@ function postTodo(todo, cb){
   }).then(cb);
 };
 
-const Client = { getTodos, postTodo };
+function deleteTodo(todoId){
+  return fetch(`api/todos/${todoId}`, {
+    method: 'DELETE'
+  }).then(() => console.log('deleted'))
+}
+
+const Client = { getTodos, postTodo, deleteTodo };
 
 export default Client;

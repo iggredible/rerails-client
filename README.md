@@ -5,6 +5,8 @@
 Overall this is a simple todo-app that uses **Rails backend** and **React frontend.** Perfect to learn how to
 communicate between two different projects.
 
+![ReRails Demo](./public/ReRails-Todo-Demo1.gif)
+
 This part will cover the Client part. To see the backend/ API part, check out the [ *rerails-API*](https://github.com/IggHub/rerails-api) repo.
 
 ## Setting up React project
@@ -43,4 +45,4 @@ Now that `this.state.todos` contain all todos, we can map them and display them 
 
 The rest of the requests, `postTodos()` and `deleteTodo` is left as an exercise. They are very similar to `getTodos()`, except they use `POST` and `DELETE` method, respectively. The codes are on this repo. You can find the `postTodo()` in action inside `AddTodo.js` and `deleteTodo` inside `TodoList.js`.
 
-If you have any question, feel free to email me!
+If you have any question, feel free to let me know!
